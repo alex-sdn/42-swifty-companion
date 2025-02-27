@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
           } else if (snapshot.hasError || !snapshot.hasData) {
             return Scaffold(body: Center(child: Text("Authentication failed")));
           } else {
+            // print(snapshot.data!); // For accessToken test
             return SearchPage(accessToken: snapshot.data!);
           }
         },
