@@ -19,7 +19,7 @@ class SearchService {
       List<UserSearch> users = data.map<UserSearch>((userData) {
         return UserSearch(
           login: userData["login"],
-          avatar: userData["image"]["link"] ?? '',
+          avatar: userData["image"]["versions"]["small"] ?? '',
         );
       }).toList();
 
