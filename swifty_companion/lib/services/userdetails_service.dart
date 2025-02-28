@@ -35,6 +35,7 @@ class UserDetailsService {
         avatar: data["image"]["versions"]["medium"] ?? '',
         fullName: data["displayname"],
         level: data["cursus_users"].last["level"],
+        campus: data["campus"].last["name"],
         projects: projects,
         skills: skills
       );

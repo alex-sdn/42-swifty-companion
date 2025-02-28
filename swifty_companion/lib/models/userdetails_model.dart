@@ -9,11 +9,6 @@ class Project {
     required this.grade,
     required this.validated
   });
-
-  @override
-  String toString() {
-    return 'Project(name: $name, grade: $grade, validated: $validated)';
-  }
 }
 
 class Skill {
@@ -21,12 +16,6 @@ class Skill {
   double  level;
 
   Skill({required this.name, required this.level});
-
-  @override
-  String toString() {
-    // TODO: implement toString
-    return 'Skill(name: $name, level: $level)';
-  }
 }
 
 class UserDetails {
@@ -34,6 +23,7 @@ class UserDetails {
   String        avatar;
   String        fullName;
   double        level;
+  String        campus;
   List<Project> projects;
   List<Skill>   skills;
 
@@ -42,12 +32,8 @@ class UserDetails {
     required this.avatar,
     required this.fullName,
     required this.level,
+    required this.campus,
     required this.projects,
     required this.skills
   });
-
-  @override
-  String toString() {
-    return 'UserDetails(login: $login, avatar: $avatar, fullName: $fullName, level: $level, projects: ${projects.map((project) => project.toString()).toList()}, skills: ${skills.map((skill) => skill.toString()).toList()})';
-  }
 }
