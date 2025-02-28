@@ -111,7 +111,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                           )
                         ),
                         Text(
-                          "Level ${skill.level}",
+                          "Level ${skill.level.toStringAsFixed(2)}",
                           style: TextStyle(
                             fontSize: 15,
                           )
