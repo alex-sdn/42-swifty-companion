@@ -58,12 +58,14 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Text("Projects"),
-                    // PROJECTS
+                    Text("Projects", style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500)),
                     _projectsList(),
                     SizedBox(height: 20),
-                    // SKILLS
-                    Text("Skills"),
+                    Text("Skills", style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500)),
                     _skillsList()
                   ]
                 )
@@ -78,46 +80,54 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     return Container(
       margin: EdgeInsets.only(top: 10, left: 10, right: 10),
       padding: EdgeInsets.symmetric(vertical: 10.0),
-      height: 250,
+      constraints: BoxConstraints(
+        maxHeight: 250
+      ),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10)
       ),
       child: SingleChildScrollView(
         child: Column(
-          children: userDetails.skills.map((skill) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    " ${skill.name}",
-                    style: TextStyle(
-                      fontSize: 15,
-                    )
-                  ),
-                  SizedBox(height: 3),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      LinearProgressIndicator(
-                        value: skill.level / 20 * 1,
-                        minHeight: 26,
-                        borderRadius: BorderRadius.circular(10),
-                        backgroundColor: const Color.fromARGB(255, 211, 211, 211),
-                        valueColor: AlwaysStoppedAnimation(Colors.blueGrey),                    
-                      ),
-                      Text(
-                        "Level ${skill.level}",
-                        style: TextStyle(fontSize: 14),
+          children: userDetails.skills.isEmpty
+            ? [Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: Text("No skills found")
+              )]
+            : userDetails.skills.map((skill) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      " ${skill.name}",
+                      style: TextStyle(
+                        fontSize: 15,
                       )
-                    ],
-                  )
-                ],
-              ) 
-            );
-          }).toList(),
+                    ),
+                    SizedBox(height: 3),
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        LinearProgressIndicator(
+                          value: skill.level / 20 * 1,
+                          minHeight: 26,
+                          borderRadius: BorderRadius.circular(10),
+                          backgroundColor: const Color.fromARGB(255, 211, 211, 211),
+                          valueColor: AlwaysStoppedAnimation(Colors.blueGrey),                    
+                        ),
+                        Text(
+                          "Level ${skill.level}",
+                          style: TextStyle(fontSize: 14),
+                        )
+                      ],
+                    )
+                  ],
+                ) 
+              );
+            }).toList(),
         )
       )
     );
@@ -127,36 +137,47 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     return Container(
       margin: EdgeInsets.only(top: 10, left: 10, right: 10),
       padding: EdgeInsets.symmetric(vertical: 10.0),
-      height: 250,
+      constraints: BoxConstraints(
+        maxHeight: 250
+      ),
       decoration: BoxDecoration(
         color: Colors.grey[200],
         borderRadius: BorderRadius.circular(10)
       ),
       child: SingleChildScrollView(
         child: Column(
-          children: userDetails.projects.map((project) {
-            Color gradeColor = project.validated == true
-              ? Colors.green
-              : project.validated == false
-                ? Colors.red
-                : Colors.grey;
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    project.name,
-                    style: TextStyle(fontSize: 15)
-                  ),
-                  Text(
-                    project.grade != null ? project.grade.toString() : "wip",
-                    style: TextStyle(fontSize: 15, color: gradeColor),
-                  ),
-                ],
-              ),
-            );
-          }).toList(),
+          children: userDetails.projects.isEmpty
+            ? [Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                child: Text("No projects found")
+              )]
+            : userDetails.projects.map((project) {
+              Color gradeColor = project.validated == true
+                ? Colors.green
+                : project.validated == false
+                  ? Colors.red
+                  : Colors.grey;
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      project.name,
+                      style: TextStyle(
+                        fontSize: 15,
+                        color: project.validated != null ? Colors.black87 : Colors.grey
+                      )
+                    ),
+                    Text(
+                      project.grade != null ? project.grade.toString() : "In Progress",
+                      style: TextStyle(fontSize: 15, color: gradeColor),
+                    ),
+                  ],
+                ),
+              );
+            }).toList(),
         )
       )
     );
