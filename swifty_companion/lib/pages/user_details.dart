@@ -194,7 +194,9 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           // AVATAR
           Center(child: CircleAvatar(
             radius: 100,
-            backgroundImage: NetworkImage(userDetails.avatar),
+            backgroundImage: userDetails.avatar != null
+              ? NetworkImage(userDetails.avatar ?? '')
+              : AssetImage('assets/images/42_logo.jpg'),
           )),
           SizedBox(height: 15),
           Text(

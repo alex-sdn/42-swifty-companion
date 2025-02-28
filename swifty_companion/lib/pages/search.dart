@@ -71,7 +71,9 @@ class _SearchPageState extends State<SearchPage> {
             itemBuilder: (context, index) {
               return ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: NetworkImage(_searchResults[index].avatar), //add condition if empty str
+                  backgroundImage: _searchResults[index].avatar != null
+                      ? NetworkImage(_searchResults[index].avatar ?? '')
+                      : AssetImage('assets/images/42_logo.jpg'),
                 ),
                 title: Text(_searchResults[index].login),
                 onTap: () {

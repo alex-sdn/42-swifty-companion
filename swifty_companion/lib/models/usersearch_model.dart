@@ -1,7 +1,7 @@
 
 class UserSearch {
   String login;
-  String avatar; //tmp
+  String? avatar;
 
   UserSearch({
     required this.login,

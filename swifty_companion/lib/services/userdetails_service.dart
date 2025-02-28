@@ -32,7 +32,7 @@ class UserDetailsService {
 
       final userDetails = UserDetails(
         login: login,
-        avatar: data["image"]["versions"]["medium"] ?? '',
+        avatar: data["image"]["versions"]["medium"],
         fullName: data["displayname"],
         level: data["cursus_users"].last["level"],
         campus: data["campus"].last["name"],

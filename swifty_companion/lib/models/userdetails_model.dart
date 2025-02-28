@@ -20,7 +20,7 @@ class Skill {
 
 class UserDetails {
   String        login;
-  String        avatar;
+  String?       avatar;
   String        fullName;
   double        level;
   String        campus;
