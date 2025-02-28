@@ -236,7 +236,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                   valueColor: AlwaysStoppedAnimation(Colors.lightBlue),                    
                 ),
                 Text(
-                  "Level ${userDetails.level}",
+                  "Level ${userDetails.level.toStringAsFixed(2)}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
                 )
               ],

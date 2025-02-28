@@ -30,11 +30,16 @@ class UserDetailsService {
         );
       }).toList();
 
+      double level;
+      data["cursus_users"].length > 2
+      ? level = data["cursus_users"][1]["level"]
+      : level = data["cursus_users"].last["level"];
+
       final userDetails = UserDetails(
         login: login,
         avatar: data["image"]["versions"]["medium"],
         fullName: data["displayname"],
-        level: data["cursus_users"].last["level"],
+        level: level,
         campus: data["campus"].last["name"],
         projects: projects,
         skills: skills
