@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/models/usersearch_model.dart';
+import 'package:swifty_companion/pages/user_details.dart';
 import 'package:swifty_companion/services/search_service.dart';
 
 class SearchPage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Search Users")),
-      backgroundColor: const Color.fromARGB(255, 231, 231, 231),
+      backgroundColor:  Colors.grey[200],
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -74,7 +75,13 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 title: Text(_searchResults[index].login),
                 onTap: () {
-                  //send to details page here
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => UserDetailsPage(
+                      login: _searchResults[index].login,
+                      accessToken: widget.accessToken
+                    ))
+                  );
                 },
               );
             },
