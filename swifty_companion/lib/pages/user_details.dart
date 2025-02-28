@@ -101,25 +101,36 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      " ${skill.name}",
-                      style: TextStyle(
-                        fontSize: 15,
-                      )
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          " ${skill.name}",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )
+                        ),
+                        Text(
+                          "Level ${skill.level}",
+                          style: TextStyle(
+                            fontSize: 15,
+                          )
+                        )
+                      ],
                     ),
                     SizedBox(height: 3),
                     Stack(
                       alignment: Alignment.center,
                       children: [
                         LinearProgressIndicator(
-                          value: skill.level / 20 * 1,
+                          value: skill.level / 21,
                           minHeight: 26,
                           borderRadius: BorderRadius.circular(10),
                           backgroundColor: const Color.fromARGB(255, 211, 211, 211),
                           valueColor: AlwaysStoppedAnimation(Colors.blueGrey),                    
                         ),
                         Text(
-                          "Level ${skill.level}",
+                          "${(skill.level / 21 * 100).toStringAsFixed(2)}%",
                           style: TextStyle(fontSize: 14),
                         )
                       ],
