@@ -108,11 +108,13 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          " ${skill.name}",
-                          style: TextStyle(
-                            fontSize: 15,
-                          )
+                        Expanded(
+                          child: Text(
+                            " ${skill.name}",
+                            style: TextStyle(
+                              fontSize: 15,
+                            )
+                          ),
                         ),
                         Text(
                           "Level ${skill.level.toStringAsFixed(2)}",
