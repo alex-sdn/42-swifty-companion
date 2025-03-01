@@ -206,7 +206,10 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 16),
       decoration: BoxDecoration(
-        color: Colors.grey[200]
+        image: DecorationImage(
+          image: AssetImage('assets/images/polygon-background.jpg'),
+          fit: BoxFit.cover
+        )
       ),
       child: Column(
         children: [
