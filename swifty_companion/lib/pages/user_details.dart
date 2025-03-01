@@ -45,7 +45,11 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.login), backgroundColor: Colors.white),
+      appBar: AppBar(
+        title: Text(widget.login),
+        centerTitle: true,
+        backgroundColor: Colors.white
+      ),
       body: _isLoading
         ? Center(child: CircularProgressIndicator())
         : SingleChildScrollView(
@@ -81,7 +85,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       margin: EdgeInsets.only(top: 10, left: 10, right: 10),
       padding: EdgeInsets.symmetric(vertical: 10.0),
       constraints: BoxConstraints(
-        maxHeight: 250
+        maxHeight: 300
       ),
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -149,7 +153,7 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       margin: EdgeInsets.only(top: 10, left: 10, right: 10),
       padding: EdgeInsets.symmetric(vertical: 10.0),
       constraints: BoxConstraints(
-        maxHeight: 250
+        maxHeight: 300
       ),
       decoration: BoxDecoration(
         color: Colors.grey[200],
@@ -174,12 +178,14 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      project.name,
-                      style: TextStyle(
-                        fontSize: 15,
-                        color: project.validated != null ? Colors.black87 : Colors.grey
-                      )
+                    Expanded(
+                      child: Text(
+                        project.name,
+                        style: TextStyle(
+                          fontSize: 15,
+                          color: project.validated != null ? Colors.black87 : Colors.grey
+                        )
+                      ),
                     ),
                     Text(
                       project.grade != null ? project.grade.toString() : "In Progress",
