@@ -6,3 +6,5 @@ This is a mobile application made with Flutter that uses 42's REST API to displa
 - Current level
 - All projects completed with their score
 - Skill levels
+
+Requires a .env with the FORTYTWO_UID and FORTYTWO_SECRET from your 42 API application.
