@@ -23,17 +23,20 @@ class UserDetailsService {
         );
       }).toList();
 
-      List<Skill> skills = data["cursus_users"].last["skills"].map<Skill>((skillData) {
-        return Skill(
-          name: skillData["name"],
-          level: skillData["level"]
-        );
-      }).toList();
+      List<Skill>?  skills;
+      double        level = 0;
+      if (!data["cursus_users"].isEmpty) {
+        skills = data["cursus_users"].last["skills"].map<Skill>((skillData) {
+          return Skill(
+            name: skillData["name"],
+            level: skillData["level"]
+          );
+        }).toList();
 
-      double level;
-      data["cursus_users"].length > 2
-      ? level = data["cursus_users"][1]["level"]
-      : level = data["cursus_users"].last["level"];
+        data["cursus_users"].length > 2
+        ? level = data["cursus_users"][1]["level"]
+        : level = data["cursus_users"].last["level"];
+      }
 
       final userDetails = UserDetails(
         login: login,

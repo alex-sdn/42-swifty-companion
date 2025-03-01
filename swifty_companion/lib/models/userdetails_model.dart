@@ -25,7 +25,7 @@ class UserDetails {
   double        level;
   String        campus;
   List<Project> projects;
-  List<Skill>   skills;
+  List<Skill>?  skills;
 
   UserDetails({
     required this.login,

@@ -93,13 +93,13 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
       ),
       child: SingleChildScrollView(
         child: Column(
-          children: userDetails.skills.isEmpty
+          children: userDetails.skills?.isEmpty ?? true
             ? [Container(
                 width: double.infinity,
                 alignment: Alignment.center,
                 child: Text("No skills found")
               )]
-            : userDetails.skills.map((skill) {
+            : userDetails.skills!.map((skill) {
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 15.0),
                 child: Column(
