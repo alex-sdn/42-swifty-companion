@@ -56,7 +56,6 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // MAIN DETAILS
               _mainDetails(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
