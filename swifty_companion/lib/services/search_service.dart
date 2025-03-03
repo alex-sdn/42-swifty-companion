@@ -1,10 +1,9 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:swifty_companion/models/usersearch_model.dart';
 
 class SearchService {
-  Future<List<UserSearch>> searchUsers(String query, String accessToken) async {
+  Future<List<UserSearch>> searchUsers(String query, String? accessToken) async {
     final Uri searchUri = Uri.parse("https://api.intra.42.fr/v2/users?range[login]=$query,${query}z");
     final response = await http.get(
       searchUri,

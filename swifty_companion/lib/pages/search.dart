@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/models/usersearch_model.dart';
 import 'package:swifty_companion/pages/user_details.dart';
+import 'package:swifty_companion/services/auth_service.dart';
 import 'package:swifty_companion/services/search_service.dart';
 
 class SearchPage extends StatefulWidget {
-  final String accessToken;
-
-  const SearchPage({super.key, required this.accessToken});
+  const SearchPage({super.key});
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -24,7 +23,8 @@ class _SearchPageState extends State<SearchPage> {
     });
 
     try {
-      List<UserSearch> results = await SearchService().searchUsers(query, widget.accessToken);
+      String? accessToken = await AuthService().getAccessToken();
+      List<UserSearch> results = await SearchService().searchUsers(query, accessToken);
 
       setState(() {
         _searchResults = results;
@@ -85,7 +85,6 @@ class _SearchPageState extends State<SearchPage> {
                     context,
                     MaterialPageRoute(builder: (context) => UserDetailsPage(
                       login: _searchResults[index].login,
-                      accessToken: widget.accessToken
                     ))
                   );
                 },

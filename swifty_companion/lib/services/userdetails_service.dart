@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:swifty_companion/models/userdetails_model.dart';
 
 class UserDetailsService {
-  static Future<UserDetails> getUserDetails(String login, String accessToken) async {
+  static Future<UserDetails> getUserDetails(String login, String? accessToken) async {
     final Uri searchUri = Uri.parse("https://api.intra.42.fr/v2/users/$login");
     final response = await http.get(
       searchUri,

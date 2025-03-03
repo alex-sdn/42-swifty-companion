@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:swifty_companion/models/userdetails_model.dart';
+import 'package:swifty_companion/services/auth_service.dart';
 import 'package:swifty_companion/services/userdetails_service.dart';
 
 class UserDetailsPage extends StatefulWidget {
-  final String accessToken;
   final String login;
 
   const UserDetailsPage({
     super.key,
-    required this.accessToken,
     required this.login
   });
 
@@ -28,7 +27,8 @@ class _UserDetailsPageState extends State<UserDetailsPage> {
 
   Future<void> fetchUserDetails() async {
     try {
-      userDetails = await UserDetailsService.getUserDetails(widget.login, widget.accessToken);
+      String? accessToken = await AuthService().getAccessToken();
+      userDetails = await UserDetailsService.getUserDetails(widget.login, accessToken);
 
       setState(() {
         _isLoading = false;

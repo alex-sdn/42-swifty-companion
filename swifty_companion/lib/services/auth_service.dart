@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class AuthService {
@@ -8,15 +8,15 @@ class AuthService {
   final String fortytwoSecret = dotenv.env['FORTYTWO_SECRET'] ?? '';
   final String apiUrl = "https://api.intra.42.fr";
 
-  // final storage = FlutterSecureStorage();
+  final storage = FlutterSecureStorage();
 
   Future<String?> getAccessToken() async {
-    // String? token = await storage.read(key: "access_token");
+    String? token = await storage.read(key: "access_token");
+    String? expiry = await storage.read(key: "expiry_time");
 
-    // token ??= await fetchAccessToken();
-
-    String? token = await fetchAccessToken();
-
+    if (token == null || !isTokenValid(expiry)) {
+      return await fetchAccessToken();
+    }
     return token;
   }
 
@@ -36,14 +36,21 @@ class AuthService {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final String token = data["access_token"];
-      // final int expiresIn = data["expires_in"];
-      // final int createdAt = data["created_at"];  Calculate time of expiry?
+      final DateTime expiry = DateTime.now().add(Duration(seconds: data["expires_in"]));
 
-      // await storage.write(key: "access_token", value: token);
+      await storage.write(key: "access_token", value: token);
+      await storage.write(key: "expiry_time", value: expiry.toIso8601String());
       return token;
     } else {
-      print("Failed to fetch access token: ${response.body}"); //debug
-      return null;
+      throw Exception("Failed to fetch access token: ${response.body}");
     }
+  }
+
+  bool isTokenValid(String? expiry) {
+    if (expiry == null) return false;
+
+    final DateTime expiryTime = DateTime.parse(expiry);
+
+    return DateTime.now().isBefore(expiryTime);
   }
 }

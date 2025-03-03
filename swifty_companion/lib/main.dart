@@ -23,11 +23,10 @@ class MyApp extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Scaffold(body: Center(child: CircularProgressIndicator()));
-          } else if (snapshot.hasError || !snapshot.hasData) {
-            return Scaffold(body: Center(child: Text("Authentication failed")));
+          } else if (snapshot.hasError) {
+            return Scaffold(body: Center(child: Text("Failed to fetch 42 access token.")));
           } else {
-            // print(snapshot.data!); // For accessToken test
-            return SearchPage(accessToken: snapshot.data!);
+            return SearchPage();
           }
         },
       ),
